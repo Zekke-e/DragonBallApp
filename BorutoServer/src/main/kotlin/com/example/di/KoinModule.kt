@@ -1,4 +1,4 @@
-package com.example.DI
+package com.example.di
 
 import com.example.repository.HeroRepository
 import com.example.repository.HeroRepositoryImpl
