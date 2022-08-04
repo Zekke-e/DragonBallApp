@@ -8,6 +8,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.koin.java.KoinJavaComponent.inject
@@ -66,6 +67,47 @@ class ApplicationTest {
             }
         }
     }
+
+    @ExperimentalSerializationApi
+    @Test
+    fun `access all heroes endpoint, query non existing page number, assert error`() {
+        testApplication {
+            environment {
+                developmentMode = false
+            }
+
+            client.get("/db/heroes?page=6").apply {
+                assertEquals(
+                    expected = HttpStatusCode.NotFound,
+                    actual = status
+                )
+            }
+        }
+    }
+
+    @Test
+    fun `access all heroes endpoint, query invalid character, assert error`() {
+        testApplication {
+            environment {
+                developmentMode = false
+            }
+
+            client.get("/db/heroes?page=invalid").apply {
+                assertEquals(
+                    expected = HttpStatusCode.BadRequest,
+                    actual = status
+                )
+                val expected = ApiResponse(
+                    success = false,
+                    message = "Only Numbers Allowed."
+                )
+                val actual = Json.decodeFromString<ApiResponse>(bodyAsText())
+                assertEquals(expected = expected, actual = actual)
+            }
+        }
+    }
+
+    // TODO: search endpoints:access non existing endpoint,assert not found
 
     private fun calculatePage(page: Int): Map<String, Int?> {
         var prevPage: Int? = page
