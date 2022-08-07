@@ -1,11 +1,23 @@
 package com.example.udemytraining
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.udemytraining.navigation.setupNavGraph
+import com.example.udemytraining.ui.theme.DbAppTheme
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
+
+    private lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContent {
+            DbAppTheme {
+                navController = rememberNavController()
+                setupNavGraph(navController = navController)
+            }
+        }
     }
 }
