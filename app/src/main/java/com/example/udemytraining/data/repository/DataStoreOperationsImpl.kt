@@ -1,4 +1,4 @@
-package com.example.udemytraining.data.pref
+package com.example.udemytraining.data.repository
 
 import android.content.Context
 import androidx.datastore.core.DataStore
