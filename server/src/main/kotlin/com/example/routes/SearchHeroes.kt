@@ -7,9 +7,9 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 
-fun Route.searchHeroes(){
+fun Route.searchHeroes() {
     val repository: HeroRepository by inject()
-    get("boruto/heroes/search"){
+    get("onBoardingCompleted") {
         val name = call.request.queryParameters["name"]
         val apiResponse = repository.searchHeroes(name = name)
 

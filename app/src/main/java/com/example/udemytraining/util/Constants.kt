@@ -2,6 +2,8 @@ package com.example.udemytraining.util
 
 object Constants {
 
+    const val BASE_URL = "http://10.0.2.2:8080"
+
     const val DETAILS_ARGUMENTS_KEY = "heroId"
 
     const val DB_DATABASE = "dragon_ball_database"
