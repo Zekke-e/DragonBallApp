@@ -7,6 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.udemytraining.presentation.screens.home.HomeScreen
 import com.example.udemytraining.presentation.screens.splash.SplashScreen
 import com.example.udemytraining.presentation.screens.welcome.WelcomeScreen
 import com.example.udemytraining.util.Constants.DETAILS_ARGUMENTS_KEY
@@ -18,7 +19,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Welcome.route
+        startDestination = Screen.Splash.route
     )
     {
         composable(route = Screen.Splash.route) {
@@ -28,7 +29,7 @@ fun SetupNavGraph(navController: NavHostController) {
             WelcomeScreen(navController = navController)
         }
         composable(route = Screen.Home.route) {
-
+            HomeScreen()
         }
         composable(
             route = Screen.Details.route,
