@@ -1,6 +1,10 @@
 package com.example.udemytraining.di
 
+import androidx.paging.ExperimentalPagingApi
+import com.example.udemytraining.data.local.DragonBallDataBase
 import com.example.udemytraining.data.remote.DbApi
+import com.example.udemytraining.data.repository.RemoteDataSourceImpl
+import com.example.udemytraining.domain.repository.RemoteDataSource
 import com.example.udemytraining.util.Constants.BASE_URL
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -15,6 +19,7 @@ import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+@ExperimentalPagingApi
 @ExperimentalSerializationApi
 @Module
 @InstallIn(SingletonComponent::class)
@@ -44,5 +49,16 @@ object NetworkModule {
     @Singleton
     fun provideDbApi(retrofit: Retrofit): DbApi {
         return retrofit.create(DbApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(
+        dbApi: DbApi, dragonBallDataBase: DragonBallDataBase
+    ): RemoteDataSource {
+        return RemoteDataSourceImpl(
+            dbApi = dbApi,
+            dbDatabase = dragonBallDataBase
+        )
     }
 }

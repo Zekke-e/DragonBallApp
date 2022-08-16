@@ -6,9 +6,9 @@ import androidx.room.TypeConverters
 import com.example.udemytraining.data.local.dao.HeroDao
 import com.example.udemytraining.data.local.dao.HeroRemoteKeyDao
 import com.example.udemytraining.domain.model.Hero
-import com.example.udemytraining.domain.model.HeroRemoteKey
+import com.example.udemytraining.domain.model.HeroRemoteKeys
 
-@Database(entities = [Hero::class, HeroRemoteKey::class], version = 1)
+@Database(entities = [Hero::class, HeroRemoteKeys::class], version = 1)
 @TypeConverters(DatabaseConverter::class)
 abstract class DragonBallDataBase : RoomDatabase() {
 
